@@ -1,0 +1,5 @@
+name: 'Node Build Release'
+description: 'Builds and releases a package'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
