@@ -7,6 +7,7 @@ const main = async () => {
 
     //Get current version
     const { exec } = require("child_process");
+    
 
     exec("yarn version --patch", (error, stdout, stderr) => {
         if (error) {
@@ -17,7 +18,8 @@ const main = async () => {
             console.log(`stderr: ${stderr}`);
             return;
         }
-        console.log(`yarn version: ${stdout}`);
+        const currentVersion = stdout;
+        core.setOutput("currentVersion", currentVersion);
     });
     //bump
 

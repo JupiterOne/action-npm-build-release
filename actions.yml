@@ -3,3 +3,6 @@ description: 'Builds and releases a package'
 runs:
   using: 'node16'
   main: 'dist/index.js'
+  outputs:
+  currentVersion:
+    description: 'The new version'

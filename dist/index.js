@@ -75,6 +75,7 @@ const main = async () => {
 
     //Get current version
     const { exec } = __nccwpck_require__(81);
+    
 
     exec("yarn version --patch", (error, stdout, stderr) => {
         if (error) {
@@ -85,7 +86,8 @@ const main = async () => {
             console.log(`stderr: ${stderr}`);
             return;
         }
-        console.log(`yarn version: ${stdout}`);
+        const currentVersion = stdout;
+        core.setOutput("currentVersion", currentVersion);
     });
     //bump
 
