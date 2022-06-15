@@ -1,0 +1,12 @@
+name: 'Node Build Release'
+description: 'Builds and releases a package'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
+inputs:
+  npm_auth_token:
+    description: 'The token to use to access NPM'
+    required: true
+  gh_token:
+    description: 'The token to use to access Github'
+    required: true

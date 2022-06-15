@@ -1,0 +1,24 @@
+{
+  "name": "action-node-build-release",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "ncc build src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JupiterOne/action-node-build-release.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JupiterOne/action-node-build-release/issues"
+  },
+  "homepage": "https://github.com/JupiterOne/action-node-build-release#readme",
+  "dependencies": {
+    "@actions/core": "^1.8.2"
+  }
+}
