@@ -10,7 +10,7 @@ const main = async () => {
   try {
     execSync('yarn global add auto',
       {stdio: 'inherit'})
-    execSync('yarn install',
+    execSync('yarn install --frozen-lockfile',
       {stdio: 'inherit'})
     execSync('yarn build',
       {stdio: 'inherit'})

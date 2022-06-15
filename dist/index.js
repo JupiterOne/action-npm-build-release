@@ -2096,7 +2096,7 @@ const main = async () => {
   try {
     execSync('yarn global add auto',
       {stdio: 'inherit'})
-    execSync('yarn install --frozen-lockfile --production',
+    execSync('yarn install --frozen-lockfile',
       {stdio: 'inherit'})
     execSync('yarn build',
       {stdio: 'inherit'})
@@ -2121,6 +2121,7 @@ const main = async () => {
 }
 
 main();
+
 })();
 
 module.exports = __webpack_exports__;
