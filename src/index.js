@@ -8,6 +8,10 @@ const main = async () => {
   const execSync = require('child_process').execSync;
   
   try {
+    console.log(`Checking git log`)
+    const gitoutput = execSync('git log -1',
+      {stdio: 'inherit'})
+    console.log(`gitoutput: ${gitoutput}`)
     execSync('yarn global add auto',
       {stdio: 'inherit'})
     execSync('yarn install --frozen-lockfile',
