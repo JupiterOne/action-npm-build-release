@@ -1,5 +1,5 @@
 {
-  "name": "action-node-build-release",
+  "name": "action-npm-build-release",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JupiterOne/action-node-build-release.git"
+    "url": "git+https://github.com/JupiterOne/action-npm-build-release.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JupiterOne/action-node-build-release/issues"
+    "url": "https://github.com/JupiterOne/action-npm-build-release/issues"
   },
-  "homepage": "https://github.com/JupiterOne/action-node-build-release#readme",
+  "homepage": "https://github.com/JupiterOne/action-npm-build-release#readme",
   "dependencies": {
     "@actions/core": "^1.8.2"
   }
