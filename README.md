@@ -1,1 +1,1 @@
-# action-node-build-release
+# action-npm-build-release
