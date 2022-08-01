@@ -15,6 +15,8 @@ const main = async () => {
       console.log('skipping due to [skip ci] message')
       return;
     }
+    execSync(`echo "//registry.npmjs.org/:_authToken=${npm_auth_token}" > .npmrc`,
+      {stdio: 'inherit'})
     execSync('yarn global add auto',
       {stdio: 'inherit'})
     execSync('yarn install --frozen-lockfile',
@@ -30,8 +32,6 @@ const main = async () => {
     execSync('git config --global commit.verbose true',
       {stdio: 'inherit'})
     execSync('git fetch --tags',
-      {stdio: 'inherit'})
-    execSync(`echo "//registry.npmjs.org/:_authToken=${npm_auth_token}" > .npmrc`,
       {stdio: 'inherit'})
     execSync(`NPM_TOKEN=${npm_auth_token} GH_TOKEN=${gh_token} auto shipit --email internal-automation.bot@jupiterone.com --name j1-internal-automation`,
       {stdio: 'inherit'})
