@@ -17,8 +17,6 @@ runs:
       shell: bash
 
     - name: Scan
-      env:
-        DEBUG: true
       run: |
         mkdir ./reports; chmod -R a+w ./reports
         touch bom.xml; chmod a+w bom.xml
