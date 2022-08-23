@@ -15,6 +15,7 @@ runs:
         yarn global add auto
         yarn install --frozen-lockfile
         yarn build
+      shell: bash
 
     - name: Scan
       run: |
@@ -29,6 +30,7 @@ runs:
         #else
         #  PASSFAIL='FAIL'
         #exit $PERILRC
+      shell: bash
 
     - name: Release
       run: |
