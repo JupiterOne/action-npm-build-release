@@ -35,6 +35,7 @@ runs:
         echo "cleaning up security scan artifacts"
         rm -f bom.xml
         rm -f .sastscanrc
+      shell: bash
 
     - name: Release
       run: |
