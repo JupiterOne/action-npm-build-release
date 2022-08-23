@@ -4,6 +4,9 @@ inputs:
   npm_auth_token:
     description: 'The token to use to access NPM'
     required: true
+  gh_token:
+    description: 'The token to use to access GitHub'
+    required: true
 runs:
   using: "composite"    
   steps:
