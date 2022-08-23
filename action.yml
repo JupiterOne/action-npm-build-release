@@ -12,15 +12,16 @@ runs:
         GITOUTPUT=$(git log -1)
         if grep -q 'skip ci' <<< $GITOUTPUT; then echo "skipping due to [skip ci] message"; exit; fi
         echo "//registry.npmjs.org/:_authToken=${{ inputs.npm_auth_token }}" > .npmrc
-        yarn global add auto
         yarn install --frozen-lockfile
         yarn build
       shell: bash
 
     - name: Scan
+      env:
+        DEBUG: true
       run: |
-        mkdir ./reports; chmod -R a+x ./reports
-        touch bom.xml; chmod a+x bom.xml
+        mkdir ./reports; chmod -R a+w ./reports
+        touch bom.xml; chmod a+w bom.xml
         npx --userconfig .npmrc @jupiterone/security-scan
         #PERILRC=$?
         #PERILSCORE="$(awk -F':' '/Total Score/ {print $4$5}' reports/peril.log 2>/dev/null)"
@@ -35,6 +36,7 @@ runs:
     - name: Release
       run: |
         echo "Release here"
+        yarn global add auto
         #git config user.email "internal-automation.bot@jupiterone.com"
         #git config user.email "internal-automation.bot@jupiterone.com"
         #git config user.name "j1-internal-automation"
