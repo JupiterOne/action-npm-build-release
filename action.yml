@@ -28,13 +28,16 @@ runs:
         PERILSCORE="$(awk -F':' '/Total Score/ {print $4$5}' reports/peril.log 2>/dev/null)"
         echo PERILSCORE - $PERILSCORE
         if $PERILRC = 0; then PASSFAIL='PASS'; else PASSFAIL='FAIL' && exit $PERILRC; fi
-        echo "cleaning up security scan artifacts"
-        git stash
       shell: bash
+
+    - name: Clean Up
+      run: |
+        echo "cleaning up security scan artifacts"
+        rm -f bom.xml
+        rm -f .sastscanrc
 
     - name: Release
       run: |
-        echo "Release here"
         yarn global add auto
         git config user.email "internal-automation.bot@jupiterone.com"
         git config user.email "internal-automation.bot@jupiterone.com"
