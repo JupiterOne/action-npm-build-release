@@ -10,7 +10,7 @@ runs:
     - name: Build
       run: |
         GITOUTPUT=$(git log -1)
-        if grep -q 'skip ci' <<< $GITOUTPUT; then echo "skipping due to [skip ci] message"; exit; fi
+        if grep -q 'skip ci' <<< $GITOUTPUT; then echo "skipping due to [skip ci] message" && exit; fi
         echo "//registry.npmjs.org/:_authToken=${{ inputs.npm_auth_token }}" > .npmrc
         yarn install --frozen-lockfile
         yarn build
@@ -24,8 +24,7 @@ runs:
         PERILRC=$?
         PERILSCORE="$(awk -F':' '/Total Score/ {print $4$5}' reports/peril.log 2>/dev/null)"
         echo PERILSCORE - $PERILSCORE
-        if $PERILRC = 0; then PASSFAIL='PASS'; else PASSFAIL='FAIL'; fi
-        exit $PERILRC
+        if $PERILRC = 0; then PASSFAIL='PASS'; else PASSFAIL='FAIL' && exit $PERILRC; fi
       shell: bash
 
     - name: Release
