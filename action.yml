@@ -39,5 +39,5 @@ runs:
         git config user.name "j1-internal-automation"
         git config --global commit.verbose true
         git fetch --tags
-        NPM_TOKEN=${npm_auth_token} GH_TOKEN=${gh_token} auto shipit --email internal-automation.bot@jupiterone.com --name j1-internal-automation
+        NPM_TOKEN=${inputs.npm_auth_token} GH_TOKEN=${inputs.gh_token} auto shipit --email internal-automation.bot@jupiterone.com --name j1-internal-automation
       shell: bash
