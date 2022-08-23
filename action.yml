@@ -21,14 +21,11 @@ runs:
         mkdir ./reports; chmod -R a+w ./reports
         touch bom.xml; chmod a+w bom.xml
         npx --userconfig .npmrc @jupiterone/security-scan
-        #PERILRC=$?
-        #PERILSCORE="$(awk -F':' '/Total Score/ {print $4$5}' reports/peril.log 2>/dev/null)"
-        #echo PERILSCORE - $PERILSCORE
-        #if [ $PERILRC = 0 ]; then
-        #  PASSFAIL='PASS'
-        #else
-        #  PASSFAIL='FAIL'
-        #exit $PERILRC
+        PERILRC=$?
+        PERILSCORE="$(awk -F':' '/Total Score/ {print $4$5}' reports/peril.log 2>/dev/null)"
+        echo PERILSCORE - $PERILSCORE
+        if $PERILRC = 0; then PASSFAIL='PASS'; else PASSFAIL='FAIL'; fi
+        exit $PERILRC
       shell: bash
 
     - name: Release
