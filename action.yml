@@ -1,12 +1,42 @@
-name: 'Node Build Release'
-description: 'Builds and releases a package'
-runs:
-  using: 'node16'
-  main: 'dist/index.js'
+name: 'Nodejs Build, Security Scan, and Release'
+description: 'Nodejs Build, Security Scan, and Release'
 inputs:
   npm_auth_token:
     description: 'The token to use to access NPM'
     required: true
-  gh_token:
-    description: 'The token to use to access Github'
-    required: true
+runs:
+  using: "composite"    
+  steps:
+    - name: Build
+      run: |
+        GITOUTPUT=$(git log -1)
+        if grep -q 'skip ci' <<< $GITOUTPUT; then echo "skipping due to [skip ci] message"; exit; fi
+        echo "//registry.npmjs.org/:_authToken=${{ inputs.npm_auth_token }}" > .npmrc
+        yarn global add auto
+        yarn install --frozen-lockfile
+        yarn build
+
+    - name: Scan
+      run: |
+        mkdir ./reports; chmod -R a+x ./reports
+        touch bom.xml; chmod a+x bom.xml
+        npx --userconfig .npmrc @jupiterone/security-scan
+        #PERILRC=$?
+        #PERILSCORE="$(awk -F':' '/Total Score/ {print $4$5}' reports/peril.log 2>/dev/null)"
+        #echo PERILSCORE - $PERILSCORE
+        #if [ $PERILRC = 0 ]; then
+        #  PASSFAIL='PASS'
+        #else
+        #  PASSFAIL='FAIL'
+        #exit $PERILRC
+
+    - name: Release
+      run: |
+        echo "Release here"
+        #git config user.email "internal-automation.bot@jupiterone.com"
+        #git config user.email "internal-automation.bot@jupiterone.com"
+        #git config user.name "j1-internal-automation"
+        #git config --global commit.verbose true
+        #git fetch --tags
+        #NPM_TOKEN=${npm_auth_token} GH_TOKEN=${gh_token} auto shipit --email internal-automation.bot@jupiterone.com --name j1-internal-automation
+      shell: bash
