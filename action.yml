@@ -28,6 +28,7 @@ runs:
         PERILSCORE="$(awk -F':' '/Total Score/ {print $4$5}' reports/peril.log 2>/dev/null)"
         echo PERILSCORE - $PERILSCORE
         if $PERILRC = 0; then PASSFAIL='PASS'; else PASSFAIL='FAIL' && exit $PERILRC; fi
+        rm .sastscanrc; rm bom.xml
       shell: bash
 
     - name: Release
