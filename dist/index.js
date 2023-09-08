@@ -2019,14 +2019,6 @@ module.exports = require("path");
 
 /***/ }),
 
-/***/ 477:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("querystring");
-
-/***/ }),
-
 /***/ 404:
 /***/ ((module) => {
 
@@ -2085,47 +2077,32 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(186);
-const { stringify } = __nccwpck_require__(477);
-const npm_auth_token = core.getInput('npm_auth_token', { required: true });
-const gh_token = core.getInput('gh_token', { required: true });
+const npm_auth_token = core.getInput("npm_auth_token", { required: true });
+const gh_token = core.getInput("gh_token", { required: true });
 
 const main = async () => {
-
   const execSync = (__nccwpck_require__(81).execSync);
-  
-  try {
 
-    const gitoutput = execSync('git log -1')
-    if (gitoutput.includes('skip ci' ))
-    {
-      console.log('skipping due to [skip ci] message')
+  try {
+    const gitoutput = execSync("git log -1");
+    if (gitoutput.includes("skip ci")) {
+      console.log("skipping due to [skip ci] message");
       return;
     }
-    execSync(`echo "//registry.npmjs.org/:_authToken=${npm_auth_token}" > .npmrc`,
-      {stdio: 'inherit'})
-    execSync('yarn global add auto',
-      {stdio: 'inherit'})
-    execSync('yarn install --frozen-lockfile',
-      {stdio: 'inherit'})
-    execSync('yarn build',
-      {stdio: 'inherit'})
-    execSync('git config user.email "internal-automation.bot@jupiterone.com"',
-      {stdio: 'inherit'})
-    execSync('git config user.email "internal-automation.bot@jupiterone.com"',
-      {stdio: 'inherit'})
-    execSync('git config user.name "j1-internal-automation"',
-      {stdio: 'inherit'})
-    execSync('git config --global commit.verbose true',
-      {stdio: 'inherit'})
-    execSync('git fetch --tags',
-      {stdio: 'inherit'})
-    execSync(`NPM_TOKEN=${npm_auth_token} GH_TOKEN=${gh_token} auto shipit --email internal-automation.bot@jupiterone.com --name j1-internal-automation`,
-      {stdio: 'inherit'})
-  }
-  catch (error) {
+    execSync(`echo "//registry.npmjs.org/:_authToken=${npm_auth_token}" > .npmrc`, { stdio: "inherit" });
+    execSync("yarn global add auto@11.0.1", { stdio: "inherit" });
+    execSync("yarn install --frozen-lockfile", { stdio: "inherit" });
+    execSync("yarn build", { stdio: "inherit" });
+    execSync('git config user.email "internal-automation.bot@jupiterone.com"', { stdio: "inherit" });
+    execSync('git config user.email "internal-automation.bot@jupiterone.com"', { stdio: "inherit" });
+    execSync('git config user.name "j1-internal-automation"', { stdio: "inherit" });
+    execSync("git config --global commit.verbose true", { stdio: "inherit" });
+    execSync("git fetch --tags", { stdio: "inherit" });
+    execSync(`NPM_TOKEN=${npm_auth_token} GH_TOKEN=${gh_token} auto shipit --email internal-automation.bot@jupiterone.com --name j1-internal-automation`, { stdio: "inherit" });
+  } catch (error) {
     core.setFailed(error.message);
   }
-}
+};
 
 main();
 
