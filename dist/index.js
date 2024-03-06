@@ -2090,7 +2090,7 @@ const main = async () => {
       return;
     }
     execSync(`echo "//registry.npmjs.org/:_authToken=${npm_auth_token}" > .npmrc`, { stdio: "inherit" });
-    execSync("yarn global add auto@11.0.1", { stdio: "inherit" });
+    execSync("yarn global add auto@11.1.1", { stdio: "inherit" });
     execSync("yarn install --frozen-lockfile", { stdio: "inherit" });
     execSync("yarn build", { stdio: "inherit" });
     execSync('git config user.email "internal-automation.bot@jupiterone.com"', { stdio: "inherit" });
